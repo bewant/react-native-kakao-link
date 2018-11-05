@@ -12,13 +12,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
-import com.kakao.kakaonavi.KakaoNaviParams;
-import com.kakao.kakaonavi.KakaoNaviService;
-import com.kakao.kakaonavi.Location;
-import com.kakao.kakaonavi.NaviOptions;
-import com.kakao.kakaonavi.options.CoordType;
-import com.kakao.kakaonavi.options.RpOption;
-import com.kakao.kakaonavi.options.VehicleType;
 import com.kakao.message.template.ButtonObject;
 import com.kakao.message.template.ContentObject;
 import com.kakao.message.template.FeedTemplate;
@@ -38,34 +31,15 @@ public class RNKakaoLinkModule extends ReactContextBaseJavaModule implements Act
     }
 
     private String getString(ReadableMap map, String key) {
-
         if(map.hasKey(key)) {
-            Log.d("JIJUYEO", map.getString(key));
             return map.getString(key);
         }
         return null;
     }
 
     @ReactMethod
-    public void navi(ReadableMap map) {
-        String name = getString(map, "name");
-        double lat = map.getDouble("lat");
-        double lng = map.getDouble("lng");
-        Location destination = Location.newBuilder(name, lng, lat).build();
-        NaviOptions options = NaviOptions.newBuilder().setCoordType(CoordType.WGS84).setVehicleType(VehicleType.FIRST).setRpOption(RpOption.SHORTEST).build();
-
-// 경유지를 1개 포함하는 KakaoNaviParams.Builder 객체
-        KakaoNaviParams.Builder builder = KakaoNaviParams.newBuilder(destination).setNaviOptions(options);
-        KakaoNaviService.getInstance().navigate(reactContext.getCurrentActivity(), builder.build());
-    }
-
-    @ReactMethod
     public void link(ReadableMap params) {
-
-        Log.d("JIJUYEOKAKAO", params.toString());
-
-        FeedTemplate feedParams = FeedTemplate
-                .newBuilder(
+        FeedTemplate feedParams = FeedTemplate.newBuilder(
                         ContentObject.newBuilder(
                                 getString(params, "title"),
                                 getString(params, "imageUrl"),
@@ -92,9 +66,6 @@ public class RNKakaoLinkModule extends ReactContextBaseJavaModule implements Act
 
             }
         });
-
-
-
     }
 
     @Override
@@ -109,8 +80,8 @@ public class RNKakaoLinkModule extends ReactContextBaseJavaModule implements Act
 
     @Override
     public void onNewIntent(Intent intent) {
-        Log.d("jijuyeo", "onNewIntent - Module Listener");
         if(intent.getData() != null) {
+
             Log.d("jijuyeo", intent.getData().toString());
         }
     }

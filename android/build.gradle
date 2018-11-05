@@ -1,3 +1,6 @@
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
 
 buildscript {
     repositories {
@@ -12,16 +15,18 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+  compileSdkVersion safeExtGet('compileSdkVersion', 27)
+    buildToolsVersion safeExtGet('buildToolsVersion', '27.0.3')
 
-    dexOptions {
+
+
+  dexOptions {
         preDexLibraries = false
-    }
+  }
 
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
+  defaultConfig {
+        minSdkVersion safeExtGet('minSdkVersion', 16)
+        targetSdkVersion safeExtGet('targetSdkVersion', 26)
         versionCode 1
         versionName "1.0"
     }
@@ -38,12 +43,7 @@ repositories {
 }
 
 dependencies {
-
-    compile 'com.facebook.react:react-native:+'
-
-    // 카카오링크 sdk를 사용하기 위해 필요.
-    compile group: 'com.kakao.sdk', name: 'kakaolink', version: '1.9.0'
-    compile group: 'com.kakao.sdk', name: 'kakaonavi', version: '1.9.0'
-
+    implementation 'com.facebook.react:react-native:+'
+    implementation "com.kakao.sdk:kakaolink:1.9.0"
+    implementation "com.kakao.sdk:kakaonavi:1.9.0"
 }
-  
