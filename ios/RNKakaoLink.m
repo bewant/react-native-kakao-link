@@ -29,7 +29,14 @@ RCT_EXPORT_METHOD(link: (NSDictionary *)params
         }];
 
         [feedTemplateBuilder addButton:[KMTButtonObject buttonObjectWithBuilderBlock:^(KMTButtonBuilder * _Nonnull buttonBuilder) {
-            buttonBuilder.title = @"앱으로 이동";
+            buttonBuilder.title = @"웹으로 보기";
+            buttonBuilder.link = [KMTLinkObject linkObjectWithBuilderBlock:^(KMTLinkBuilder * _Nonnull linkBuilder) {
+                linkBuilder.mobileWebURL = [NSURL URLWithString:[params objectForKey:@"mobileWebURL"]];
+            }];
+        }]];
+
+        [feedTemplateBuilder addButton:[KMTButtonObject buttonObjectWithBuilderBlock:^(KMTButtonBuilder * _Nonnull buttonBuilder) {
+            buttonBuilder.title = @"앱으로 보기";
             buttonBuilder.link = [KMTLinkObject linkObjectWithBuilderBlock:^(KMTLinkBuilder * _Nonnull linkBuilder) {
                 linkBuilder.iosExecutionParams = [params objectForKey:@"iosExecutionParams"];
                 linkBuilder.androidExecutionParams = [params objectForKey:@"androidExecutionParams"];
