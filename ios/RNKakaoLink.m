@@ -11,9 +11,7 @@
 }
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(link: (NSDictionary *)params
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(link: (NSDictionary *)params)
 {
     KMTTemplate *template = [KMTFeedTemplate feedTemplateWithBuilderBlock:^(KMTFeedTemplateBuilder * _Nonnull feedTemplateBuilder) {
 
@@ -23,8 +21,7 @@ RCT_EXPORT_METHOD(link: (NSDictionary *)params
             contentBuilder.desc = [params objectForKey:@"desc"];
             contentBuilder.imageURL = [NSURL URLWithString:[params objectForKey:@"imageUrl"]];
             contentBuilder.link = [KMTLinkObject linkObjectWithBuilderBlock:^(KMTLinkBuilder * _Nonnull linkBuilder) {
-                linkBuilder.iosExecutionParams = [params objectForKey:@"iosExecutionParams"];
-                linkBuilder.androidExecutionParams = [params objectForKey:@"androidExecutionParams"];
+                linkBuilder.mobileWebURL = [NSURL URLWithString:[params objectForKey:@"mobileWebURL"]];
             }];
         }];
 
@@ -42,7 +39,7 @@ RCT_EXPORT_METHOD(link: (NSDictionary *)params
                 linkBuilder.androidExecutionParams = [params objectForKey:@"androidExecutionParams"];
             }];
         }]];
-    }];
+    };
 
     [[KLKTalkLinkCenter sharedCenter] sendDefaultWithTemplate:template success:^(NSDictionary<NSString *,NSString *> * _Nullable warningMsg, NSDictionary<NSString *,NSString *> * _Nullable argumentMsg) {
     } failure:^(NSError * _Nonnull error) {
