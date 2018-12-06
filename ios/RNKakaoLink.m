@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(link: (NSDictionary *)params)
                 linkBuilder.androidExecutionParams = [params objectForKey:@"androidExecutionParams"];
             }];
         }]];
-    };
+    }];
 
     [[KLKTalkLinkCenter sharedCenter] sendDefaultWithTemplate:template success:^(NSDictionary<NSString *,NSString *> * _Nullable warningMsg, NSDictionary<NSString *,NSString *> * _Nullable argumentMsg) {
     } failure:^(NSError * _Nonnull error) {
