@@ -44,8 +44,8 @@ public class RNKakaoLinkModule extends ReactContextBaseJavaModule implements Act
                                 getString(params, "title"),
                                 getString(params, "imageUrl"),
                                 LinkObject.newBuilder()
-                                        .setIosExecutionParams(getString(params, "iosExecutionParams"))
-                                        .setAndroidExecutionParams(getString(params, "androidExecutionParams"))
+                                        .setWebUrl(getString(params, "webUrl"))
+                                        .setMobileWebUrl(getString(params, "mobileWebUrl"))
                                         .build())
                                 .setDescrption(getString(params, "desc"))
                                 .build())
