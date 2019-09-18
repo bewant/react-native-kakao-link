@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.homepage     = "https://reflash.kr"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author             = { "author" => "author@domain.cn" }
+  s.author             = { "kimkr" => "kimkr@reflash.kr" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/author/RNKakaoLink.git", :tag => "master" }
+  s.source       = { :git => "https://github.com/kimkr/RNKakaoLink.git", :tag => "master" }
   s.source_files  = "RNKakaoLink/**/*.{h,m}"
   s.requires_arc = true
 
